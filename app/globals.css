@@ -1,0 +1,144 @@
+/* Hallmark · macrostructure: Product Shelf · tone: clinical retail · anchor hue: Royalis blue */
+@import "../tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bone: var(--color-surface);
+  --paper: var(--color-paper);
+  --carbon: var(--color-ink);
+  --lab: var(--color-muted);
+  --arctic: var(--color-accent);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--carbon);
+  font-feature-settings: "tnum";
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+.grid > * {
+  min-width: 0;
+}
+
+main {
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgba(0, 150, 215, 0.22);
+}
+
+a,
+button,
+input,
+select,
+textarea,
+summary {
+  outline-color: var(--arctic);
+  outline-offset: 3px;
+  touch-action: manipulation;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--arctic);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@layer utilities {
+  .interactive-lift {
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+    will-change: transform;
+  }
+
+  .hairline-panel {
+    border: 1px solid var(--color-line);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  }
+
+  .reveal-stagger > * {
+    animation: soft-reveal var(--dur-slow) var(--ease-snap) both;
+  }
+
+  .reveal-stagger > *:nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .reveal-stagger > *:nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  .reveal-stagger > *:nth-child(4) {
+    animation-delay: 210ms;
+  }
+
+  @media (hover: hover) {
+    .interactive-lift:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
