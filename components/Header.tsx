@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FlaskConical, Menu, Search, ShoppingCart, UserRound } from "lucide-react";
+import { Menu, Search, ShoppingCart, UserRound } from "lucide-react";
 import { navItems } from "@/lib/data";
 
 function isActive(pathname: string, href: string) {
@@ -22,15 +23,19 @@ export function Header() {
         Skip to content
       </a>
       <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-3 md:px-8">
-        <Link href="/" className="group flex items-center gap-3" aria-label="Royalis Labs home">
-          <span className="grid h-10 w-10 place-items-center rounded-lab border border-carbon bg-carbon text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition-colors duration-200 ease-lab group-hover:bg-arctic">
-            <FlaskConical size={18} strokeWidth={1.75} aria-hidden="true" />
-          </span>
-          <span>
-            <span className="block font-display text-xl leading-none text-carbon transition-colors duration-200 ease-lab group-hover:text-arctic">
-              Royalis Labs
-            </span>
-            <span className="block text-xs leading-5 text-lab">Canadian research peptides</span>
+        <Link href="/" className="group flex min-h-12 items-center gap-3" aria-label="Royalis Labs home">
+          <Image
+            src="/royalis-logo.svg"
+            alt="Royalis Labs"
+            width={132}
+            height={100}
+            priority
+            className="h-12 w-auto transition-opacity duration-200 ease-lab group-hover:opacity-80 md:h-14"
+          />
+          <span className="hidden border-l border-arctic/15 pl-3 text-xs leading-5 text-lab sm:block">
+            Canadian
+            <br />
+            research peptides
           </span>
         </Link>
 
@@ -79,7 +84,7 @@ export function Header() {
           </Link>
         </div>
 
-        <details className="group md:hidden">
+        <details className="group ml-auto block shrink-0 md:hidden">
           <summary className="grid h-11 w-11 cursor-pointer list-none place-items-center rounded-lab border border-carbon/20 text-carbon transition-colors duration-200 ease-lab hover:bg-bone">
             <Menu size={18} strokeWidth={1.75} aria-hidden="true" />
             <span className="sr-only">Open menu</span>
