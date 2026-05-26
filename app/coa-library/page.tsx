@@ -150,15 +150,13 @@ export default function CoaLibraryPage({ searchParams }: { searchParams?: { batc
                     <ArrowRight size={14} strokeWidth={1.75} aria-hidden="true" />
                   </Link>
                   {coa.reportUrl ? (
-                    <Link
+                    <a
                       href={coa.reportUrl}
-                      target="_blank"
-                      rel="noreferrer"
                       className="inline-flex min-h-11 items-center gap-2 font-medium text-arctic transition-colors duration-200 ease-lab hover:text-carbon"
                     >
                       Lab result
                       <ExternalLink size={14} strokeWidth={1.75} aria-hidden="true" />
-                    </Link>
+                    </a>
                   ) : (
                     <span className="font-medium text-lab">Lab result pending</span>
                   )}

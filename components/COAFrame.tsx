@@ -89,14 +89,12 @@ export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: b
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-arctic/10 bg-paper p-4 text-sm">
         <span className="text-lab">Record: {coa.method}</span>
         {coa.reportUrl ? (
-          <Link
+          <a
             href={coa.reportUrl}
-            target="_blank"
-            rel="noreferrer"
             className="inline-flex min-h-11 items-center font-medium text-arctic transition-colors duration-200 ease-lab hover:text-carbon"
           >
             Open lab result
-          </Link>
+          </a>
         ) : coa.pdf ? (
           <Link
             href={coa.pdf}

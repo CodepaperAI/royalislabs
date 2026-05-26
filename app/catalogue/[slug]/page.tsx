@@ -73,15 +73,13 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {product.labReportUrl ? (
-              <Link
+              <a
                 href={product.labReportUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lab border border-arctic px-5 py-3 text-sm font-medium text-arctic transition-colors duration-200 ease-lab hover:bg-arctic hover:text-paper"
               >
                 <ExternalLink size={16} strokeWidth={1.75} aria-hidden="true" />
                 Testing details
-              </Link>
+              </a>
             ) : (
               <div className="flex min-h-11 items-center justify-center rounded-lab border border-carbon/15 px-5 py-3 text-center text-sm font-medium text-lab">
                 Testing pending

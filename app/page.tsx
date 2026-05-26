@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
-import { ResearchNotice } from "@/components/ResearchNotice";
 import { TrustStrip } from "@/components/TrustStrip";
 import { categories, featuredOrder, getProduct, money, products } from "@/lib/data";
 
@@ -14,49 +13,64 @@ const heroProducts = ["retatrutide-10mg", "ghk-cu-50mg"]
   .map((slug) => getProduct(slug))
   .filter((product): product is (typeof products)[number] => Boolean(product));
 const testedCount = products.filter((product) => product.reportStatus === "available").length;
+const researchUseNotice =
+  "Premium pharmaceutical-grade peptides, rigorously lab tested for purity and potency. Intended strictly for research purposes only. Not for human or animal consumption. Not intended for diagnostic, therapeutic, or medical use. By purchasing, you agree that these products will be used for legitimate research purposes only.";
 
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-arctic/10 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_58%,#ffffff_100%)]">
-        <div className="mx-auto grid w-full max-w-[1440px] items-center gap-10 px-4 py-12 md:grid-cols-[0.82fr_1.18fr] md:px-8 md:py-16">
-          <div className="reveal-stagger flex flex-col justify-center">
-            <p className="mb-4 text-sm font-semibold text-arctic">Canadian research peptides</p>
-            <h1 className="max-w-2xl font-display text-4xl leading-none text-carbon sm:text-6xl">
-              Royalis products,
-              <br />
-              clearly presented.
+      <section className="relative isolate overflow-hidden border-b border-arctic/10 bg-carbon text-paper">
+        <Image
+          src="/hero/lab-vials.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,18,37,0.94)_0%,rgba(6,27,55,0.82)_48%,rgba(6,27,55,0.62)_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_74%_28%,rgba(0,150,215,0.28),transparent_35%)]" />
+
+        <div className="mx-auto grid min-h-[650px] w-full max-w-[1440px] items-center gap-10 px-4 py-12 md:grid-cols-[1fr_0.86fr] md:px-8 lg:min-h-[720px]">
+          <div className="reveal-stagger flex max-w-[calc(100vw-2rem)] flex-col justify-center md:max-w-3xl">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-arctic">
+              Enjoy free shipping on orders over $200+
+            </p>
+            <h1 className="max-w-full font-display text-[2.45rem] leading-[1.02] text-paper sm:text-6xl sm:leading-[0.96] lg:text-7xl">
+              High-Purity, Third-Party Verified Peptides
+              <span className="block text-arctic">By Royalis Labs</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-lab">
-              Product imagery, vial strength, price, and lab-result status stay close to the buying path.
+            <p className="mt-6 max-w-full text-base leading-7 text-paper/86 sm:max-w-2xl md:text-xl md:leading-9">
+              Every batch is independently verified by third-party labs. Every product is backed by
+              published lab results. Trusted by researchers worldwide.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/catalogue"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lab bg-carbon px-5 py-3 text-sm font-medium text-paper transition-colors duration-200 ease-lab hover:bg-arctic"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lab bg-arctic px-6 py-3 text-sm font-semibold text-paper shadow-soft transition-colors duration-200 ease-lab hover:bg-paper hover:text-carbon"
               >
-                Shop catalogue
+                View products
                 <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
               </Link>
               <Link
                 href="/coa-library"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lab border border-arctic px-5 py-3 text-sm font-medium text-arctic transition-colors duration-200 ease-lab hover:bg-arctic hover:text-paper"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lab border border-arctic bg-carbon/28 px-6 py-3 text-sm font-semibold text-paper backdrop-blur transition-colors duration-200 ease-lab hover:bg-paper hover:text-carbon"
               >
-                Testing details
+                Lab results
                 <Sparkles size={16} strokeWidth={1.75} aria-hidden="true" />
               </Link>
             </div>
-            <p className="mt-6 text-sm text-lab">
+            <p className="mt-6 text-sm text-paper/68">
               {products.length} products / {testedCount} tested lots listed
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:justify-self-end">
             {heroProducts.map((product, index) => (
               <Link
                 key={product.slug}
                 href={`/catalogue/${product.slug}`}
-                className="interactive-lift group relative min-h-[380px] overflow-hidden rounded-image border border-arctic/10 bg-paper shadow-product motion-safe:animate-product-rise sm:min-h-[500px]"
+                className="interactive-lift group relative min-h-[235px] overflow-hidden rounded-image border border-paper/20 bg-paper/95 shadow-product backdrop-blur motion-safe:animate-product-rise sm:min-h-[430px] md:w-[240px] lg:w-[280px]"
                 style={{ animationDelay: `${index * 90}ms` }}
                 aria-label={`${product.name}, ${money(product.price)}`}
               >
@@ -65,14 +79,22 @@ export default function HomePage() {
                   alt={`${product.name} Royalis product image`}
                   fill
                   priority={index === 0}
-                  sizes="(max-width: 768px) 100vw, 28vw"
-                  className="object-contain p-10 transition-transform duration-300 ease-snap motion-safe:group-hover:scale-[1.03] md:p-14"
+                  sizes="(max-width: 768px) 50vw, 280px"
+                  className="object-contain p-5 transition-transform duration-300 ease-snap motion-safe:group-hover:scale-[1.03] sm:p-8 md:p-10"
                 />
-                <span className="absolute bottom-4 right-4 rounded-lab border border-arctic/15 bg-paper/95 px-4 py-2 text-lg font-semibold text-carbon shadow-soft tabular-nums">
+                <span className="absolute bottom-3 right-3 rounded-lab border border-arctic/15 bg-paper px-3 py-2 text-sm font-semibold text-carbon shadow-soft tabular-nums sm:bottom-4 sm:right-4 sm:px-4 sm:text-lg">
                   {money(product.price)}
                 </span>
               </Link>
             ))}
+          </div>
+        </div>
+
+        <div className="relative border-t border-paper/12 bg-paper text-carbon">
+          <div className="mx-auto w-full max-w-[1440px] px-4 py-5 md:px-8">
+            <p className="max-w-6xl text-sm leading-7 tracking-[0.04em] text-carbon md:text-base md:leading-8 md:tracking-[0.08em]">
+              {researchUseNotice}
+            </p>
           </div>
         </div>
       </section>
@@ -147,9 +169,6 @@ export default function HomePage() {
               <ArrowRight size={15} strokeWidth={1.75} aria-hidden="true" />
             </button>
           </form>
-        </div>
-        <div className="mx-auto w-full max-w-[1440px] px-4 pb-10 md:px-8">
-          <ResearchNotice tight />
         </div>
       </section>
     </>
