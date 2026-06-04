@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Plus } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import { AddToCartButton } from "@/components/AddToCartButton";
 import { COAFrame } from "@/components/COAFrame";
 import { ProductPhoto } from "@/components/ProductPhoto";
 import { ResearchNotice } from "@/components/ResearchNotice";
@@ -30,6 +31,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
   const coa = coas.find((record) => record.batch === product.batch);
   if (!coa) notFound();
+  const isOrderable = product.reportStatus === "available" || product.reportStatus === "not-applicable";
 
   return (
     <>
@@ -57,7 +59,9 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <p className="mt-5 max-w-xl text-lg leading-8 text-lab">
             {product.reportStatus === "available"
               ? `${product.purity} purity. Lab result linked.`
-              : "Product record imported. Lab result pending."}
+              : product.reportStatus === "not-applicable"
+                ? "Supply item. Lab result not applicable."
+                : "Product record imported. Lab result pending."}
           </p>
 
           <div className="mt-8 flex items-end justify-between gap-6 border-y border-carbon/10 bg-mist/60 px-4 py-5">
@@ -82,17 +86,14 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </a>
             ) : (
               <div className="flex min-h-11 items-center justify-center rounded-lab border border-carbon/15 px-5 py-3 text-center text-sm font-medium text-lab">
-                Testing pending
+                {product.reportStatus === "not-applicable" ? "Lab result not applicable" : "Testing pending"}
               </div>
             )}
-            {product.reportStatus === "available" ? (
-              <Link
-                href="/cart"
+            {isOrderable ? (
+              <AddToCartButton
+                productSlug={product.slug}
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lab bg-carbon px-5 py-3 text-sm font-medium text-paper transition-colors duration-200 ease-lab hover:bg-arctic"
-              >
-                <Plus size={16} strokeWidth={1.75} aria-hidden="true" />
-                Add to cart
-              </Link>
+              />
             ) : (
               <div className="flex min-h-11 items-center justify-center rounded-lab bg-carbon/10 px-5 py-3 text-center text-sm font-medium text-carbon/60">
                 Awaiting report

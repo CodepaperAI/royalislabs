@@ -18,8 +18,8 @@ export default function ContactPage() {
           Contact Royalis Labs.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-lab">
-          The Royalis contact page lists email, phone, and a simple message form for
-          product or order questions.
+          Inquiries are handled through the Royalis Labs Google Workspace inbox at
+          info@royalislabs.com for product, order, shipping, and testing questions.
         </p>
         <div className="mt-8 grid gap-3 text-sm text-carbon sm:grid-cols-2">
           <a href="mailto:info@royalislabs.com" className="inline-flex items-center gap-2 border border-carbon/15 bg-paper p-4 hover:border-arctic">
@@ -38,7 +38,7 @@ export default function ContactPage() {
           <form className="border border-carbon/15 bg-bone p-5">
             <h2 className="font-display text-3xl leading-tight">Order support</h2>
             <p className="mt-3 text-sm leading-6 text-lab">
-              Use this for order, shipping, or product questions.
+              Use the Google Workspace inbox for order, shipping, or product questions.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {["Order number", "Product", "Batch if available", "Email"].map((label) => (

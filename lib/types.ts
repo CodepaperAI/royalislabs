@@ -3,7 +3,8 @@ export type Category =
   | "Tissue repair research"
   | "Cognitive research"
   | "Longevity research"
-  | "Metabolic research";
+  | "Metabolic research"
+  | "Research supplies";
 
 export type Product = {
   slug: string;
@@ -21,7 +22,7 @@ export type Product = {
   image: string;
   sourceUrl: string;
   labReportUrl?: string;
-  reportStatus: "available" | "source-listed" | "pending";
+  reportStatus: "available" | "source-listed" | "pending" | "not-applicable";
   sourceNote?: string;
   concentration: string;
   storage: string;

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
+import { ConsentGate } from "@/components/ConsentGate";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${ibmPlexSans.variable} ${sourceSerif.variable}`}>
       <body className="font-sans">
         <Header />
+        <ConsentGate />
         <main id="main-content">{children}</main>
         <Footer />
       </body>

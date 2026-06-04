@@ -34,6 +34,10 @@ export const categories: Array<{ name: Category; description: string }> = [
   {
     name: "Metabolic research",
     description: "Batch-tested peptides for metabolic pathway and receptor research."
+  },
+  {
+    name: "Research supplies",
+    description: "Supply items used alongside controlled Royalis research workflows."
   }
 ];
 
@@ -44,7 +48,7 @@ const handlingSpecs = [
   { label: "Appearance", value: "Lyophilized research vial" },
   { label: "Testing", value: "Third-party lab result when matched and published" },
   { label: "Fill format", value: "Royalis labeled crimp-top research vial" },
-  { label: "Shipment window", value: "Ships from Canada via tracked domestic delivery" }
+  { label: "Shipment window", value: "Ships from Canada via tracked Canada Post delivery" }
 ];
 
 export const products: Product[] = [
@@ -55,24 +59,24 @@ export const products: Product[] = [
     category: "GH axis research",
     format: "10mg lyophilized vial",
     price: 90,
-    purity: "Testing pending",
-    assayedMass: "Testing pending",
-    batch: "PENDING-TESA-10",
-    lab: "Lab result pending",
-    coaId: "COA-ROY-TESA-PENDING",
-    testDate: "Not published",
+    purity: "98.939%",
+    assayedMass: "8.91mg",
+    batch: "JAN-151603",
+    lab: "Janoshik",
+    coaId: "JAN-151603",
+    testDate: "2026-05-19",
     image: "/products-original/klow.png",
     sourceUrl: "https://royalislabs.com/product/klow/",
-    reportStatus: "pending",
-    sourceNote: unavailableReportNote,
+    labReportUrl: "https://janoshik.com/tests/151603-Tesamorelin_10mg_ZE5FSKW5W17C",
+    reportStatus: "available",
     concentration: "10mg",
     storage: "Store sealed and temperature controlled. Keep protected from light.",
-    referenceStandard: "Matching Royalis lab result not published yet.",
+    referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "Current Royalis product listing imported from the original site. The redesign keeps the product visible while clearly flagging that the testing link still needs to be published before launch.",
+      "Current Royalis product listing imported from the original site, now paired with the matched Janoshik lab result.",
     specs: handlingSpecs,
-    batchHistory: []
+    batchHistory: [{ batch: "JAN-151603", purity: "98.939%", lab: "Janoshik", date: "2026-05-19" }]
   },
   {
     slug: "ghk-cu-50mg",
@@ -98,6 +102,36 @@ export const products: Product[] = [
     overview:
       "A live Royalis catalogue item with product photography imported. The testing slot is intentionally marked pending until a matching single-product lab result is published.",
     specs: handlingSpecs,
+    batchHistory: []
+  },
+  {
+    slug: "bac-water",
+    name: "BAC WATER",
+    sku: "ROY-BAC-WATER",
+    category: "Research supplies",
+    format: "Bacteriostatic water vial",
+    price: 10,
+    purity: "Not applicable",
+    assayedMass: "0.9% benzyl alcohol",
+    batch: "SUP-BAC-WATER",
+    lab: "Not applicable",
+    coaId: "SUP-BAC-WATER",
+    testDate: "Not applicable",
+    image: "/products-original/bac-water.png",
+    sourceUrl: "https://royalislabs.com/product/bac-water/",
+    reportStatus: "not-applicable",
+    sourceNote: "Bacteriostatic water is a research supply item, so a peptide-style lab result is not applicable.",
+    concentration: "0.9% benzyl alcohol",
+    storage: "Store sealed and temperature controlled. Keep protected from light.",
+    referenceStandard: "Research supply item; peptide lab-result matching is not applicable.",
+    molecular: "Bacteriostatic water research supply",
+    overview: "Royalis BAC Water supply item with product photography and direct pricing.",
+    specs: [
+      { label: "Appearance", value: "Clear bacteriostatic water supply vial" },
+      { label: "Testing", value: "Peptide lab result not applicable" },
+      { label: "Fill format", value: "Royalis labeled crimp-top supply vial" },
+      { label: "Shipment window", value: "Ships from Canada via tracked Canada Post delivery" }
+    ],
     batchHistory: []
   },
   {
@@ -422,7 +456,12 @@ export const coas: CoaRecord[] = products.map((product) => ({
   assayedMass: product.assayedMass,
   lab: product.lab,
   testDate: product.testDate,
-  method: product.reportStatus === "available" ? "Janoshik direct lab result" : "Lab result pending",
+  method:
+    product.reportStatus === "available"
+      ? "Janoshik direct lab result"
+      : product.reportStatus === "not-applicable"
+        ? "Lab result not applicable"
+        : "Lab result pending",
   reportUrl: product.labReportUrl,
   reportStatus: product.reportStatus,
   sourceNote: product.sourceNote,
@@ -505,7 +544,7 @@ export const faqs: FaqGroup[] = [
       {
         question: "How long does shipping take?",
         answer:
-          "Most orders ship the same business day, with standard delivery ETAs averaging 1-2 business days. Remote areas or courier delays may take longer."
+          "Most orders ship the same business day by Canada Post, with standard delivery ETAs averaging 1-2 business days. Remote areas or Canada Post delays may take longer."
       },
       {
         question: "Is tracking provided?",

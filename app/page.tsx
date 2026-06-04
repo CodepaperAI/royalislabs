@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 import { TrustStrip } from "@/components/TrustStrip";
 import { categories, featuredOrder, getProduct, money, products } from "@/lib/data";
+import { productThumbnail } from "@/lib/product-images";
 
 const featuredProducts = featuredOrder
   .map((slug) => getProduct(slug))
@@ -13,69 +14,56 @@ const heroProducts = ["retatrutide-10mg", "ghk-cu-50mg"]
   .map((slug) => getProduct(slug))
   .filter((product): product is (typeof products)[number] => Boolean(product));
 const testedCount = products.filter((product) => product.reportStatus === "available").length;
-const researchUseNotice =
-  "Premium pharmaceutical-grade peptides, rigorously lab tested for purity and potency. Intended strictly for research purposes only. Not for human or animal consumption. Not intended for diagnostic, therapeutic, or medical use. By purchasing, you agree that these products will be used for legitimate research purposes only.";
 
 export default function HomePage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden border-b border-arctic/10 bg-carbon text-paper">
-        <Image
-          src="/hero/lab-vials.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,18,37,0.94)_0%,rgba(6,27,55,0.82)_48%,rgba(6,27,55,0.62)_100%)]" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_74%_28%,rgba(0,150,215,0.28),transparent_35%)]" />
-
+      <section className="relative isolate overflow-hidden border-b border-arctic/10 bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] text-carbon">
         <div className="mx-auto grid min-h-[650px] w-full max-w-[1440px] items-center gap-10 px-4 py-12 md:grid-cols-[1fr_0.86fr] md:px-8 lg:min-h-[720px]">
-          <div className="reveal-stagger flex max-w-[calc(100vw-2rem)] flex-col justify-center md:max-w-3xl">
+          <div className="reveal-stagger flex w-full min-w-0 flex-col justify-center md:max-w-3xl">
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-arctic">
               Enjoy free shipping on orders over $200+
             </p>
-            <h1 className="max-w-full font-display text-[2.45rem] leading-[1.02] text-paper sm:text-6xl sm:leading-[0.96] lg:text-7xl">
+            <h1 className="max-w-full break-words font-display text-[2.2rem] leading-[1.06] text-carbon [text-wrap:wrap] sm:text-6xl sm:leading-[0.96] lg:text-7xl">
               High-Purity, Third-Party Verified Peptides
               <span className="block text-arctic">By Royalis Labs</span>
             </h1>
-            <p className="mt-6 max-w-full text-base leading-7 text-paper/86 sm:max-w-2xl md:text-xl md:leading-9">
+            <p className="mt-6 max-w-full text-base leading-7 text-lab [text-wrap:wrap] sm:max-w-2xl md:text-xl md:leading-9">
               Every batch is independently verified by third-party labs. Every product is backed by
               published lab results. Trusted by researchers worldwide.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/catalogue"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lab bg-arctic px-6 py-3 text-sm font-semibold text-paper shadow-soft transition-colors duration-200 ease-lab hover:bg-paper hover:text-carbon"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lab bg-carbon px-6 py-3 text-sm font-semibold text-paper shadow-soft transition-colors duration-200 ease-lab hover:bg-arctic"
               >
                 View products
                 <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
               </Link>
               <Link
                 href="/coa-library"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lab border border-arctic bg-carbon/28 px-6 py-3 text-sm font-semibold text-paper backdrop-blur transition-colors duration-200 ease-lab hover:bg-paper hover:text-carbon"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lab border border-arctic bg-paper px-6 py-3 text-sm font-semibold text-arctic shadow-rule transition-colors duration-200 ease-lab hover:bg-arctic hover:text-paper"
               >
                 Lab results
                 <Sparkles size={16} strokeWidth={1.75} aria-hidden="true" />
               </Link>
             </div>
-            <p className="mt-6 text-sm text-paper/68">
+            <p className="mt-6 text-sm text-lab">
               {products.length} products / {testedCount} tested lots listed
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:justify-self-end">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 md:justify-self-end">
             {heroProducts.map((product, index) => (
               <Link
                 key={product.slug}
                 href={`/catalogue/${product.slug}`}
-                className="interactive-lift group relative min-h-[235px] overflow-hidden rounded-image border border-paper/20 bg-paper/95 shadow-product backdrop-blur motion-safe:animate-product-rise sm:min-h-[430px] md:w-[240px] lg:w-[280px]"
+                className="interactive-lift group relative min-h-[235px] overflow-hidden rounded-image border border-arctic/10 bg-paper shadow-product motion-safe:animate-product-rise sm:min-h-[430px] md:w-[240px] lg:w-[280px]"
                 style={{ animationDelay: `${index * 90}ms` }}
                 aria-label={`${product.name}, ${money(product.price)}`}
               >
                 <Image
-                  src={product.image}
+                  src={productThumbnail(product.image)}
                   alt={`${product.name} Royalis product image`}
                   fill
                   priority={index === 0}
@@ -90,13 +78,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="relative border-t border-paper/12 bg-paper text-carbon">
-          <div className="mx-auto w-full max-w-[1440px] px-4 py-5 md:px-8">
-            <p className="max-w-6xl text-sm leading-7 tracking-[0.04em] text-carbon md:text-base md:leading-8 md:tracking-[0.08em]">
-              {researchUseNotice}
-            </p>
-          </div>
-        </div>
       </section>
 
       <TrustStrip />

@@ -13,7 +13,7 @@ const policyBlocks = [
   {
     icon: Truck,
     title: "Shipping promise",
-    body: "Most orders ship the same business day, with standard delivery ETAs averaging 1-2 business days."
+    body: "Most orders ship by Canada Post the same business day, with standard delivery ETAs averaging 1-2 business days."
   },
   {
     icon: PackageCheck,
@@ -23,7 +23,7 @@ const policyBlocks = [
   {
     icon: AlertTriangle,
     title: "Exceptions and delays",
-    body: "Remote or rural delivery and courier delays can extend the listed average ETA."
+    body: "Remote or rural delivery and Canada Post delays can extend the listed average ETA."
   },
   {
     icon: CheckCircle2,
@@ -102,7 +102,7 @@ export default function ShippingReturnsPage() {
           {[
             ["Shipping area", "Orders can only be shipped to addresses within Canada."],
             ["Carrier", "Orders ship domestically via Canada Post."],
-            ["Timing", "Most orders ship same business day; average ETA is 1-2 business days."],
+            ["Timing", "Most orders ship by Canada Post the same business day; average ETA is 1-2 business days."],
             ["Returns", "All sales are final according to the Royalis FAQ."]
           ].map(([label, value]) => (
             <div key={label} className="grid grid-cols-[0.4fr_0.6fr] border-b border-carbon/10 last:border-b-0">

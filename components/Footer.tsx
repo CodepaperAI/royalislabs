@@ -3,11 +3,16 @@ import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { navItems, trustPillars } from "@/lib/data";
 
 const policyLinks = [
+  { href: "/terms", label: "Terms & Conditions" },
+  { href: "/disclaimer", label: "Disclaimer" },
   { href: "/shipping-returns", label: "Shipping & Returns" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
   { href: "/coa-library", label: "Testing" }
 ];
+
+const researchUseNotice =
+  "Premium pharmaceutical-grade peptides, rigorously lab tested for purity and potency. Intended strictly for research purposes only. Not for human or animal consumption. Not intended for diagnostic, therapeutic, or medical use. By purchasing, you agree that these products will be used for legitimate research purposes only.";
 
 export function Footer() {
   return (
@@ -79,17 +84,14 @@ export function Footer() {
         <div>
           <p className="text-sm font-semibold text-paper">Payment</p>
           <p className="mt-4 text-sm leading-6 text-paper/70">
-            Product prices follow the Royalis WooCommerce catalogue. Checkout availability
-            depends on the active Royalis Labs store configuration.
+            E-transfer orders remain payment pending until Royalis Labs confirms the
+            actual bank deposit and matches it to the order number.
           </p>
         </div>
       </div>
 
       <div className="border-t border-paper/15 px-4 py-5 text-xs leading-5 text-paper/55 md:px-8">
-        <div className="mx-auto max-w-[1440px]">
-          Research use only. Not for human or veterinary use. No protocols, dosing, or
-          administration guidance is provided by Royalis Labs.
-        </div>
+        <p className="mx-auto max-w-[1440px]">{researchUseNotice}</p>
       </div>
     </footer>
   );

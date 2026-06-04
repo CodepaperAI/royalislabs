@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { coas, getCoaByBatch } from "@/lib/data";
+import { productThumbnail } from "@/lib/product-images";
 import type { CoaRecord } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -17,7 +18,8 @@ export default function CoaLibraryPage({ searchParams }: { searchParams?: { batc
   const statusRank: Record<CoaRecord["reportStatus"], number> = {
     available: 0,
     "source-listed": 1,
-    pending: 2
+    "not-applicable": 2,
+    pending: 3
   };
   const visibleCoas = [...coas].sort((a, b) => {
     if (a.batch === selected.batch) return -1;
@@ -28,18 +30,21 @@ export default function CoaLibraryPage({ searchParams }: { searchParams?: { batc
   function statusLabel(coa: CoaRecord) {
     if (coa.reportStatus === "available") return "Lab result linked";
     if (coa.reportStatus === "source-listed") return "Lab result listed";
+    if (coa.reportStatus === "not-applicable") return "Not applicable";
     return "Pending";
   }
 
   function badgeLabel(coa: CoaRecord) {
     if (coa.reportStatus === "available") return "Linked";
     if (coa.reportStatus === "source-listed") return "Listed";
+    if (coa.reportStatus === "not-applicable") return "Supply item";
     return "Pending";
   }
 
   function resultSummary(coa: CoaRecord) {
     if (coa.reportStatus === "available") return `${coa.lab} lab result is linked for this batch.`;
     if (coa.reportStatus === "source-listed") return `${coa.lab} result is listed; direct lab link is pending.`;
+    if (coa.reportStatus === "not-applicable") return "Supply item; peptide lab result is not applicable.";
     return "Matching lab result is pending for this Royalis product.";
   }
 
@@ -102,7 +107,7 @@ export default function CoaLibraryPage({ searchParams }: { searchParams?: { batc
                     aria-label={`View ${coa.productName}`}
                   >
                     <Image
-                      src={coa.productImage}
+                      src={productThumbnail(coa.productImage)}
                       alt={`${coa.productName} Royalis product image`}
                       fill
                       sizes="88px"
@@ -158,23 +163,14 @@ export default function CoaLibraryPage({ searchParams }: { searchParams?: { batc
                       <ExternalLink size={14} strokeWidth={1.75} aria-hidden="true" />
                     </a>
                   ) : (
-                    <span className="font-medium text-lab">Lab result pending</span>
+                    <span className="font-medium text-lab">
+                      {coa.reportStatus === "not-applicable" ? "Lab result not applicable" : "Lab result pending"}
+                    </span>
                   )}
                 </div>
               </article>
             );
           })}
-        </div>
-      </section>
-
-      <section className="border-t border-arctic/10 bg-paper">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-3 px-4 py-6 text-sm leading-6 text-lab md:flex-row md:items-center md:justify-between md:px-8">
-          <p>
-            Match the batch shown on a product card with the batch shown here before ordering.
-          </p>
-          <p className="font-medium text-carbon">
-            Selected batch: <span className="text-arctic">{selected.batch}</span>
-          </p>
         </div>
       </section>
     </>

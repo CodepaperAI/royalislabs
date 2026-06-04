@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { productThumbnail } from "@/lib/product-images";
 import type { CoaRecord } from "@/lib/types";
 
 export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: boolean }) {
   const hasDirectReport = Boolean(coa.reportUrl);
+  const isSupplyItem = coa.reportStatus === "not-applicable";
 
   return (
     <section className="overflow-hidden rounded-image border border-arctic/10 bg-paper shadow-soft">
@@ -42,7 +44,7 @@ export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: b
         <div className={`grid bg-paper text-carbon ${compact ? "md:grid-cols-[180px_1fr]" : "md:grid-cols-[0.38fr_0.62fr]"}`}>
           <div className={`relative bg-bone ${compact ? "min-h-[240px]" : "min-h-[420px]"}`}>
             <Image
-              src={coa.productImage}
+              src={compact ? productThumbnail(coa.productImage) : coa.productImage}
               alt={`${coa.productName} product photography`}
               fill
               sizes={compact ? "180px" : "(max-width: 768px) 100vw, 32vw"}
@@ -52,10 +54,14 @@ export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: b
           <div className="grid content-between gap-8 p-5 md:p-8">
             <div>
               <p className="text-sm font-semibold text-arctic">
-                {hasDirectReport ? "Lab result linked" : "Testing status"}
+                {hasDirectReport ? "Lab result linked" : isSupplyItem ? "Supply item" : "Testing status"}
               </p>
               <h3 className="mt-3 font-display text-3xl leading-tight md:text-5xl">
-                {hasDirectReport ? "Third-party result available." : "Lab result pending."}
+                {hasDirectReport
+                  ? "Third-party result available."
+                  : isSupplyItem
+                    ? "Lab result not applicable."
+                    : "Lab result pending."}
               </h3>
               <p className="mt-5 max-w-xl text-sm leading-6 text-lab">
                 {hasDirectReport
@@ -79,7 +85,9 @@ export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: b
                     ? "Available"
                     : coa.reportStatus === "source-listed"
                       ? "Lab result listed"
-                      : "Pending"}
+                      : coa.reportStatus === "not-applicable"
+                        ? "Not applicable"
+                        : "Pending"}
                 </p>
               </div>
             </div>
@@ -103,7 +111,9 @@ export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: b
             Open PDF
           </Link>
         ) : (
-          <span className="font-medium text-lab">Lab result pending</span>
+          <span className="font-medium text-lab">
+            {isSupplyItem ? "Lab result not applicable" : "Lab result pending"}
+          </span>
         )}
       </div>
     </section>

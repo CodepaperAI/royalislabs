@@ -1,20 +1,46 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FileText, Minus, Plus, Trash2 } from "lucide-react";
-import { ResearchNotice } from "@/components/ResearchNotice";
+import {
+  calculateShipping,
+  CART_STORAGE_KEY,
+  type CartLine,
+  parseStoredCart
+} from "@/lib/cart";
 import { getProduct, money } from "@/lib/data";
-
-const initialItems = [
-  { slug: "retatrutide-20mg", qty: 1 },
-  { slug: "semax-10mg-2", qty: 1 }
-];
+import { productThumbnail } from "@/lib/product-images";
 
 export function CartClient() {
-  const [items, setItems] = useState(initialItems);
-  const [confirmed, setConfirmed] = useState(false);
+  const [items, setItems] = useState<CartLine[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    function loadCart() {
+      setItems(parseStoredCart(window.localStorage.getItem(CART_STORAGE_KEY)));
+      setHydrated(true);
+    }
+
+    loadCart();
+    window.addEventListener("storage", loadCart);
+    window.addEventListener("royalis-cart-updated", loadCart);
+    return () => {
+      window.removeEventListener("storage", loadCart);
+      window.removeEventListener("royalis-cart-updated", loadCart);
+    };
+  }, []);
+
+  function persist(next: CartLine[]) {
+    setItems(next);
+    if (next.length) {
+      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(next));
+    } else {
+      window.localStorage.removeItem(CART_STORAGE_KEY);
+    }
+    window.dispatchEvent(new Event("royalis-cart-updated"));
+  }
 
   const cartItems = items
     .map((item) => {
@@ -27,14 +53,28 @@ export function CartClient() {
     () => cartItems.reduce((total, item) => total + item.product.price * item.qty, 0),
     [cartItems]
   );
+  const shipping = calculateShipping(subtotal);
 
   function updateQty(slug: string, delta: number) {
-    setItems((current) =>
-      current
-        .map((item) =>
-          item.slug === slug ? { ...item, qty: Math.max(1, item.qty + delta) } : item
-        )
-        .filter((item) => item.qty > 0)
+    persist(
+      items.map((item) =>
+        item.slug === slug ? { ...item, qty: Math.max(1, item.qty + delta) } : item
+      )
+    );
+  }
+
+  function removeItem(slug: string) {
+    persist(items.filter((item) => item.slug !== slug));
+  }
+
+  if (!hydrated) {
+    return (
+      <section className="mx-auto max-w-[900px] px-4 py-16 text-center md:px-8">
+        <p className="font-display text-3xl leading-tight text-carbon md:text-5xl">Loading cart.</p>
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-lab">
+          Pulling your selected Royalis products into checkout.
+        </p>
+      </section>
     );
   }
 
@@ -64,7 +104,7 @@ export function CartClient() {
           <article key={product.slug} className="grid gap-4 border border-carbon/15 bg-paper p-4 md:grid-cols-[140px_1fr_auto]">
             <div className="relative aspect-[4/5] overflow-hidden rounded-image border border-arctic/10 bg-paper">
               <Image
-                src={product.image}
+                src={productThumbnail(product.image)}
                 alt={`${product.name} product image`}
                 fill
                 sizes="140px"
@@ -128,7 +168,7 @@ export function CartClient() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setItems((current) => current.filter((item) => item.slug !== product.slug))}
+                  onClick={() => removeItem(product.slug)}
                   className="grid h-9 w-9 place-items-center rounded-lab border border-carbon/20 text-lab"
                   aria-label={`Remove ${product.name}`}
                 >
@@ -149,7 +189,13 @@ export function CartClient() {
           </div>
           <div className="flex justify-between gap-4">
             <span className="text-lab">Shipping estimate</span>
-            <span className="font-medium text-carbon">Calculated at checkout</span>
+            <span className="font-medium text-carbon tabular-nums">
+              {shipping === 0 ? "Free" : money(shipping)}
+            </span>
+          </div>
+          <div className="flex justify-between gap-4">
+            <span className="text-lab">Total estimate</span>
+            <span className="font-semibold text-carbon tabular-nums">{money(subtotal + shipping)}</span>
           </div>
           <div className="flex justify-between gap-4">
             <span className="text-lab">Packaging</span>
@@ -157,41 +203,22 @@ export function CartClient() {
           </div>
           <div className="flex justify-between gap-4">
             <span className="text-lab">Payment</span>
-            <span className="font-medium text-carbon">Store checkout</span>
+            <span className="font-medium text-carbon">E-transfer</span>
           </div>
         </div>
-        <label className="mt-5 flex items-start gap-3 text-sm leading-6 text-carbon">
-          <input
-            type="checkbox"
-            checked={confirmed}
-            onChange={(event) => setConfirmed(event.target.checked)}
-            className="mt-1 h-4 w-4 accent-arctic"
-          />
-          I understand these materials are sold for research use only and are not for human
-          or veterinary use.
-        </label>
         <Link
-          href={confirmed ? "/checkout" : "#research-confirmation"}
-          id="research-confirmation"
-          aria-disabled={!confirmed}
-          className={`mt-5 inline-flex w-full justify-center rounded-lab px-5 py-3 text-sm font-medium ${
-            confirmed
-              ? "bg-carbon text-paper hover:bg-arctic"
-              : "cursor-not-allowed bg-carbon/30 text-carbon/55"
-          }`}
+          href="/checkout"
+          className="mt-5 inline-flex w-full justify-center rounded-lab bg-carbon px-5 py-3 text-sm font-medium text-paper hover:bg-arctic"
         >
           Checkout
         </Link>
         <button
           type="button"
-          onClick={() => setItems([])}
+          onClick={() => persist([])}
           className="mt-3 inline-flex w-full justify-center rounded-lab border border-carbon/20 px-5 py-3 text-sm text-lab hover:text-carbon"
         >
           Clear cart
         </button>
-        <div className="mt-5">
-          <ResearchNotice tight />
-        </div>
       </aside>
     </section>
   );

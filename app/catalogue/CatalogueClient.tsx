@@ -11,7 +11,8 @@ import type { Category, Product } from "@/lib/types";
 const statusRank = {
   available: 0,
   "source-listed": 1,
-  pending: 2
+  "not-applicable": 2,
+  pending: 3
 };
 
 export function CatalogueClient({ initialCategory }: { initialCategory?: string }) {

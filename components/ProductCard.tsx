@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, FileText, Plus } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
+import { AddToCartButton } from "@/components/AddToCartButton";
 import { money } from "@/lib/data";
 import type { Product } from "@/lib/types";
 import { ProductPhoto } from "./ProductPhoto";
@@ -13,24 +14,31 @@ export function ProductCard({
   product: Product;
   onViewCoa?: (product: Product) => void;
 }) {
+  const isOrderable = product.reportStatus === "available" || product.reportStatus === "not-applicable";
   const reportLabel =
     product.reportStatus === "available"
       ? "Tested"
       : product.reportStatus === "source-listed"
         ? "Listed result"
-        : "Testing pending";
+        : product.reportStatus === "not-applicable"
+          ? "Supply item"
+          : "Testing pending";
   const assayLabel =
     product.reportStatus === "available"
       ? `${product.purity} purity / ${product.assayedMass} avg. mass`
       : product.reportStatus === "source-listed"
         ? `${product.purity} lab result listed / link pending`
-        : "Testing pending";
+        : product.reportStatus === "not-applicable"
+          ? product.assayedMass
+          : "Testing pending";
   const proofLabel =
     product.reportStatus === "available"
       ? "Third-party tested"
       : product.reportStatus === "source-listed"
         ? "Result listed"
-        : "Pending";
+        : product.reportStatus === "not-applicable"
+          ? "Not required"
+          : "Pending";
 
   return (
     <article className="interactive-lift group grid overflow-hidden rounded-image border border-arctic/10 bg-paper shadow-soft focus-within:border-arctic/60">
@@ -42,6 +50,8 @@ export function ProductCard({
           src={product.image}
           alt={`Royalis research vial labelled ${product.name}, batch ${product.batch}`}
           className="h-full"
+          thumbnail
+          sizes="(max-width: 768px) 100vw, 28vw"
         />
         <span className="absolute left-3 top-3 rounded-lab border border-arctic/15 bg-paper/95 px-2 py-1 text-xs font-medium text-arctic shadow-rule">
           {reportLabel}
@@ -95,14 +105,13 @@ export function ProductCard({
               Testing
             </Link>
           )}
-          {product.reportStatus === "available" ? (
-            <Link
-              href="/cart"
+          {isOrderable ? (
+            <AddToCartButton
+              productSlug={product.slug}
+              label="Add"
+              compact
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lab bg-carbon px-3 py-2 text-sm font-medium text-paper transition-colors duration-200 ease-lab hover:bg-arctic"
-            >
-              <Plus size={15} strokeWidth={1.75} aria-hidden="true" />
-              Add
-            </Link>
+            />
           ) : (
             <Link
               href={`/catalogue/${product.slug}`}
