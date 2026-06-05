@@ -65,7 +65,7 @@ export function COAFrame({ coa, compact = false }: { coa: CoaRecord; compact?: b
               </h3>
               <p className="mt-5 max-w-xl text-sm leading-6 text-lab">
                 {hasDirectReport
-                  ? "This matched Janoshik link is kept here as a supporting product detail."
+                  ? coa.sourceNote ?? "This matched Janoshik link is kept here as a supporting product detail."
                   : coa.sourceNote ?? "A matching third-party lab result is not linked for this product yet."}
               </p>
             </div>
