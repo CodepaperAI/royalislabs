@@ -73,6 +73,7 @@ export function ProductCard({
           </div>
         </div>
 
+        <p className="text-sm leading-6 text-lab">{product.overview}</p>
         <p className="text-sm text-lab">{assayLabel}</p>
 
         <div className="grid grid-cols-2 gap-2 text-xs text-lab">

@@ -74,7 +74,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "Current Royalis product listing imported from the original site, now paired with the matched Janoshik lab result.",
+      "Tesamorelin is a synthetic GHRH analog used in controlled research into growth-hormone-axis signaling, endocrine feedback, and metabolic pathway markers.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151603", purity: "98.939%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -84,7 +84,7 @@ export const products: Product[] = [
     sku: "ROY-GHKCU-50",
     category: "Tissue repair research",
     format: "50mg lyophilized vial",
-    price: 90,
+    price: 40,
     purity: "Testing pending",
     assayedMass: "Testing pending",
     batch: "PENDING-GHKCU-50",
@@ -100,7 +100,7 @@ export const products: Product[] = [
     referenceStandard: "Matching single-product Royalis lab result not published yet.",
     molecular: "Copper peptide, lyophilized research format",
     overview:
-      "A live Royalis catalogue item with product photography imported. The testing slot is intentionally marked pending until a matching single-product lab result is published.",
+      "GHK-cu is a copper-bound tripeptide used in research on extracellular matrix signaling, collagen-related pathways, tissue repair models, and skin and hair biology.",
     specs: handlingSpecs,
     batchHistory: []
   },
@@ -125,7 +125,8 @@ export const products: Product[] = [
     storage: "Store sealed and temperature controlled. Keep protected from light.",
     referenceStandard: "Research supply item; peptide lab-result matching is not applicable.",
     molecular: "Bacteriostatic water research supply",
-    overview: "Royalis BAC Water supply item with product photography and direct pricing.",
+    overview:
+      "Bacteriostatic water with 0.9% benzyl alcohol is supplied as a research diluent companion item for lyophilized materials.",
     specs: [
       { label: "Appearance", value: "Clear bacteriostatic water supply vial" },
       { label: "Testing", value: "Peptide lab result not applicable" },
@@ -156,7 +157,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "Original Royalis product data and photography are retained, with the matched Janoshik lab result surfaced before purchase.",
+      "Ipamorelin is a selective ghrelin-receptor agonist studied in growth-hormone secretagogue research, including pulse-signaling and endocrine response models.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151610", purity: "99.798%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -182,7 +183,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "This active catalogue item is shown with product imagery and a matched Janoshik lab result.",
+      "CJC-1295 no DAC is a short-acting GHRH analog used in research on pulsatile GH signaling and pituitary-axis feedback without the extended DAC carrier.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151617", purity: "99.754%", lab: "Janoshik", date: "2026-05-20" }]
   },
@@ -208,7 +209,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result linked to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "Current Royalis catalogue item with a third-party testing link surfaced as supporting product detail.",
+      "Selank is a synthetic tuftsin-analog peptide used in neuromodulation research, including models of stress response, mood regulation, and cognitive signaling.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151673", purity: "99.957%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -234,7 +235,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result linked to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "A direct-report product record designed to make verification immediate before a buyer reaches checkout.",
+      "Semax is an ACTH-fragment-derived peptide used in research on neuroplasticity, neuroprotection, cognitive signaling, and stress-response pathways.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151666", purity: "99.007%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -260,7 +261,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result linked to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "Royalis product data is paired with a direct Janoshik lab result so users can verify the lot without searching the old site.",
+      "TB-500 is a thymosin-beta-4-related peptide used in research on cell migration, actin regulation, angiogenesis models, and tissue-repair signaling.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151652", purity: "98.251%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -286,7 +287,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result linked to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "A low-friction product record with proof positioned directly beside purchase intent, not hidden on a secondary page.",
+      "Epitalon is a synthetic tetrapeptide studied in longevity research, including telomere biology, pineal signaling, circadian rhythm models, and cellular stress pathways.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151680", purity: "99.651%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -312,7 +313,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "Royalis product data is paired with the matched Janoshik lab result for direct verification.",
+      "BPC-157 is a pentadecapeptide studied in tissue-repair research, including tendon, ligament, muscle, gastrointestinal, inflammatory, and growth-factor signaling models.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151659", purity: "98.767%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -338,7 +339,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "The product remains accessible and image-led, with the matched Janoshik lab result kept close to the product record.",
+      "MOTS-c is a mitochondrial-derived peptide used in research on cellular energy regulation, glucose metabolism, mitochondrial stress response, and metabolic homeostasis.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151687", purity: "98.381%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -364,7 +365,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result linked to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "A lab-backed product record with the Janoshik report exposed as a primary trust action.",
+      "Retatrutide is a multi-receptor incretin research compound studied across GLP-1, GIP, and glucagon receptor signaling in metabolic-pathway models.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151624", purity: "99.518%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -390,7 +391,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result linked to this product.",
     molecular: "Synthetic peptide, lyophilized research format",
     overview:
-      "This product uses the Janoshik verification URL directly, keeping proof next to the buying path.",
+      "Retatrutide is a multi-receptor incretin research compound studied across GLP-1, GIP, and glucagon receptor signaling in metabolic-pathway models.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151631", purity: "99.478%", lab: "Janoshik", date: "2026-05-19" }]
   },
@@ -416,7 +417,7 @@ export const products: Product[] = [
     referenceStandard: "Royalis Janoshik lab result matched to this product.",
     molecular: "Copper peptide, lyophilized research format",
     overview:
-      "Product photography and matched Janoshik lab-result values are shown directly for verification.",
+      "GHK-cu is a copper-bound tripeptide used in research on extracellular matrix signaling, collagen-related pathways, tissue repair models, and skin and hair biology.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151645", purity: "99.326%", lab: "Janoshik", date: "2026-05-20" }]
   },
@@ -442,7 +443,7 @@ export const products: Product[] = [
     referenceStandard: "Janoshik lab result lists assayed mass; purity is not listed on the report.",
     molecular: "NAD+ research material, lyophilized format",
     overview:
-      "The original Royalis listing is included with its product image, and the matched Janoshik report is linked with the missing purity value labeled plainly.",
+      "NAD+ is a cellular coenzyme used in research on mitochondrial function, ATP generation, DNA-repair signaling, oxidative stress, and sirtuin-associated aging pathways.",
     specs: handlingSpecs,
     batchHistory: [{ batch: "JAN-151694", purity: "Not listed", lab: "Janoshik", date: "2026-05-15" }]
   }

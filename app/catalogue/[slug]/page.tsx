@@ -18,10 +18,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
   return {
     title: product.name,
-    description:
-      product.reportStatus === "available"
-        ? `${product.name}. ${product.purity} purity. Direct ${product.lab} report linked.`
-        : `${product.name}. Royalis product record with lab result status shown clearly.`
+    description: product.overview
   };
 }
 
@@ -57,6 +54,9 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <p className="mb-3 text-sm font-semibold text-arctic">{product.category}</p>
           <h1 className="font-display text-4xl leading-none text-carbon sm:text-6xl md:text-7xl">{product.name}</h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-lab">
+            {product.overview}
+          </p>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-lab">
             {product.reportStatus === "available"
               ? `${product.purity} purity. Lab result linked.`
               : product.reportStatus === "not-applicable"
@@ -127,6 +127,10 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <span className="hidden text-sm text-lab group-open:inline">Close</span>
             </summary>
             <dl className="grid border-t border-carbon/10 text-sm md:grid-cols-2">
+              <div className="border-b border-carbon/10 p-4 md:col-span-2">
+                <dt className="text-lab">Description</dt>
+                <dd className="mt-1 font-medium leading-6 text-carbon">{product.overview}</dd>
+              </div>
               {[
                 ["Concentration", product.concentration],
                 ["Storage", product.storage],
