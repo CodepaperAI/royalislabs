@@ -66,7 +66,7 @@ export function Header() {
             className="inline-flex min-h-11 items-center gap-2 rounded-lab border border-arctic px-3 py-2 text-sm text-arctic transition-colors duration-200 ease-lab hover:bg-arctic hover:text-paper"
           >
             <Search size={15} strokeWidth={1.75} aria-hidden="true" />
-            Testing lookup
+            Testing reports
           </Link>
           <Link
             href="/account"
@@ -108,7 +108,7 @@ export function Header() {
                   className="inline-flex items-center justify-center gap-2 rounded-lab border border-arctic px-3 py-3 text-sm text-arctic"
                 >
                   <Search size={15} strokeWidth={1.75} aria-hidden="true" />
-                  Testing
+                  Testing reports
                 </Link>
                 <Link
                   href="/cart"

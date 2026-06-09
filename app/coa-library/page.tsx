@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { coas, getCoaByBatch } from "@/lib/data";
 import { productThumbnail } from "@/lib/product-images";
 import type { CoaRecord } from "@/lib/types";
@@ -146,14 +146,7 @@ export default function CoaLibraryPage({ searchParams }: { searchParams?: { batc
                   ))}
                 </dl>
 
-                <div className="flex flex-col items-start gap-3 border-t border-arctic/10 pt-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-                  <Link
-                    href={`/coa-library?batch=${coa.batch}`}
-                    className="inline-flex min-h-11 items-center gap-2 font-medium text-arctic transition-colors duration-200 ease-lab hover:text-carbon"
-                  >
-                    Select
-                    <ArrowRight size={14} strokeWidth={1.75} aria-hidden="true" />
-                  </Link>
+                <div className="flex min-h-11 items-center justify-end border-t border-arctic/10 pt-3 text-sm">
                   {coa.reportUrl ? (
                     <a
                       href={coa.reportUrl}
