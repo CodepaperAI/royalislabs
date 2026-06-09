@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Source_Serif_4 } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ConsentGate } from "@/components/ConsentGate";
 import { Footer } from "@/components/Footer";
@@ -18,6 +19,8 @@ const sourceSerif = Source_Serif_4({
   variable: "--font-display",
   display: "swap"
 });
+
+const googleTagManagerId = "GTM-TSBCV8CR";
 
 export const metadata: Metadata = {
   title: {
@@ -57,7 +60,24 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${ibmPlexSans.variable} ${sourceSerif.variable}`}>
+      <Script id="google-tag-manager" strategy="beforeInteractive">
+        {`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${googleTagManagerId}');
+        `}
+      </Script>
       <body className="font-sans">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <Header />
         <ConsentGate />
         <main id="main-content">{children}</main>
