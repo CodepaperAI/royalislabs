@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Phone } from "lucide-react";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 import { ResearchNotice } from "@/components/ResearchNotice";
 import { SectionHeader } from "@/components/SectionHeader";
 import { supportWindows } from "@/lib/data";
@@ -21,14 +21,23 @@ export default function ContactPage() {
           Inquiries are handled through the Royalis Labs Google Workspace inbox at
           info@royalislabs.com for product, order, shipping, and testing questions.
         </p>
-        <div className="mt-8 grid gap-3 text-sm text-carbon sm:grid-cols-2">
+        <div className="mt-8 grid gap-3 text-sm text-carbon sm:grid-cols-3">
           <a href="mailto:info@royalislabs.com" className="inline-flex items-center gap-2 border border-carbon/15 bg-paper p-4 hover:border-arctic">
             <Mail size={16} strokeWidth={1.75} className="text-arctic" aria-hidden="true" />
             info@royalislabs.com
           </a>
-          <a href="tel:0120232562" className="inline-flex items-center gap-2 border border-carbon/15 bg-paper p-4 hover:border-arctic">
+          <a href="tel:+14377759715" className="inline-flex items-center gap-2 border border-carbon/15 bg-paper p-4 hover:border-arctic">
             <Phone size={16} strokeWidth={1.75} className="text-arctic" aria-hidden="true" />
-            0120232562
+            437-775-9715
+          </a>
+          <a
+            href="https://wa.me/14377759715?text=Hello%20Royalis%20Labs%2C%20I%20have%20a%20question."
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 border border-carbon/15 bg-paper p-4 hover:border-arctic"
+          >
+            <MessageCircle size={16} strokeWidth={1.75} className="text-arctic" aria-hidden="true" />
+            Chat on WhatsApp
           </a>
         </div>
       </section>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function CataloguePage({
   searchParams
 }: {
-  searchParams?: { category?: string };
+  searchParams?: { category?: string; search?: string };
 }) {
   return (
     <>
@@ -25,7 +25,7 @@ export default function CataloguePage({
         </p>
         </div>
       </section>
-      <CatalogueClient initialCategory={searchParams?.category} />
+      <CatalogueClient initialCategory={searchParams?.category} initialQuery={searchParams?.search} />
     </>
   );
 }

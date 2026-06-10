@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
 import { COAFrame } from "@/components/COAFrame";
 import { ProductCard } from "@/components/ProductCard";
@@ -15,13 +15,23 @@ const statusRank = {
   pending: 3
 };
 
-export function CatalogueClient({ initialCategory }: { initialCategory?: string }) {
+export function CatalogueClient({
+  initialCategory,
+  initialQuery
+}: {
+  initialCategory?: string;
+  initialQuery?: string;
+}) {
   const validInitial = categories.some((category) => category.name === initialCategory)
     ? (initialCategory as Category)
     : "All";
   const [category, setCategory] = useState<Category | "All">(validInitial);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery ?? "");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    setQuery(initialQuery ?? "");
+  }, [initialQuery]);
 
   const filteredProducts = useMemo(() => {
     const search = query.trim().toLowerCase();
@@ -52,6 +62,7 @@ export function CatalogueClient({ initialCategory }: { initialCategory?: string 
             <label className="block">
               <span className="text-sm font-medium text-carbon">Search</span>
               <input
+                id="product-search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Product, batch, purity"

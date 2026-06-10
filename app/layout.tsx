@@ -5,6 +5,7 @@ import "./globals.css";
 import { ConsentGate } from "@/components/ConsentGate";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { WhatsAppContact } from "@/components/WhatsAppContact";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <ConsentGate />
         <main id="main-content">{children}</main>
+        <WhatsAppContact />
         <Footer />
       </body>
     </html>

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, ShoppingCart, UserRound } from "lucide-react";
+import { FileSearch, Menu, Search, ShoppingCart, UserRound } from "lucide-react";
 import { navItems } from "@/lib/data";
 
 function isActive(pathname: string, href: string) {
@@ -61,12 +61,35 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <form
+            action="/catalogue"
+            className="flex w-40 min-w-0 items-center rounded-lab border border-arctic/20 bg-paper shadow-rule transition-colors duration-200 ease-lab focus-within:border-arctic lg:w-48 xl:w-64"
+          >
+            <label htmlFor="site-product-search" className="sr-only">
+              Search products
+            </label>
+            <input
+              id="site-product-search"
+              name="search"
+              type="search"
+              placeholder="Search products"
+              className="h-11 min-w-0 flex-1 bg-transparent px-3 text-sm text-carbon outline-none placeholder:text-lab"
+            />
+            <button
+              type="submit"
+              className="grid h-11 w-11 shrink-0 place-items-center border-l border-arctic/15 text-arctic transition-colors duration-200 ease-lab hover:bg-arctic hover:text-paper"
+              aria-label="Search products"
+            >
+              <Search size={16} strokeWidth={1.75} aria-hidden="true" />
+            </button>
+          </form>
           <Link
             href="/coa-library"
             className="inline-flex min-h-11 items-center gap-2 rounded-lab border border-arctic px-3 py-2 text-sm text-arctic transition-colors duration-200 ease-lab hover:bg-arctic hover:text-paper"
+            aria-label="Testing reports"
           >
-            <Search size={15} strokeWidth={1.75} aria-hidden="true" />
-            Testing reports
+            <FileSearch size={15} strokeWidth={1.75} aria-hidden="true" />
+            <span className="hidden lg:inline">Testing reports</span>
           </Link>
           <Link
             href="/account"
@@ -90,6 +113,28 @@ export function Header() {
             <span className="sr-only">Open menu</span>
           </summary>
           <div className="absolute left-0 right-0 top-full border-b border-arctic/15 bg-paper px-4 py-4 shadow-soft">
+            <form
+              action="/catalogue"
+              className="mb-3 flex items-center rounded-lab border border-arctic/20 bg-paper shadow-rule transition-colors duration-200 ease-lab focus-within:border-arctic"
+            >
+              <label htmlFor="mobile-product-search" className="sr-only">
+                Search products
+              </label>
+              <input
+                id="mobile-product-search"
+                name="search"
+                type="search"
+                placeholder="Search products"
+                className="h-11 min-w-0 flex-1 bg-transparent px-3 text-sm text-carbon outline-none placeholder:text-lab"
+              />
+              <button
+                type="submit"
+                className="grid h-11 w-11 shrink-0 place-items-center border-l border-arctic/15 text-arctic"
+                aria-label="Search products"
+              >
+                <Search size={16} strokeWidth={1.75} aria-hidden="true" />
+              </button>
+            </form>
             <nav className="grid gap-1" aria-label="Mobile navigation">
               {navItems.map((item) => (
                 <Link
@@ -107,7 +152,7 @@ export function Header() {
                   href="/coa-library"
                   className="inline-flex items-center justify-center gap-2 rounded-lab border border-arctic px-3 py-3 text-sm text-arctic"
                 >
-                  <Search size={15} strokeWidth={1.75} aria-hidden="true" />
+                  <FileSearch size={15} strokeWidth={1.75} aria-hidden="true" />
                   Testing reports
                 </Link>
                 <Link

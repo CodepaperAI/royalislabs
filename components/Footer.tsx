@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { navItems, trustPillars } from "@/lib/data";
 
 const policyLinks = [
@@ -44,10 +44,22 @@ export function Footer() {
               <Mail size={15} strokeWidth={1.75} aria-hidden="true" />
               info@royalislabs.com
             </span>
-            <span className="inline-flex items-center gap-2">
+            <a
+              href="https://wa.me/14377759715?text=Hello%20Royalis%20Labs%2C%20I%20have%20a%20question."
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 transition-colors duration-200 ease-lab hover:text-paper"
+            >
+              <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" />
+              WhatsApp 437-775-9715
+            </a>
+            <a
+              href="tel:+14377759715"
+              className="inline-flex items-center gap-2 transition-colors duration-200 ease-lab hover:text-paper"
+            >
               <Phone size={15} strokeWidth={1.75} aria-hidden="true" />
-              0120232562
-            </span>
+              437-775-9715
+            </a>
           </div>
         </div>
 

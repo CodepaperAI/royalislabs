@@ -221,7 +221,7 @@ export const products: Product[] = [
     sku: "ROY-SMX-10",
     category: "Cognitive research",
     format: "10mg lyophilized vial",
-    price: 80,
+    price: 55,
     purity: "99.007%",
     assayedMass: "10.80mg",
     batch: "JAN-151666",
@@ -585,7 +585,7 @@ export const faqs: FaqGroup[] = [
 
 export const supportWindows = [
   { label: "Email", value: "info@royalislabs.com" },
-  { label: "Phone", value: "0120232562" },
+  { label: "Phone", value: "437-775-9715" },
   { label: "Shipping", value: "Canada only" }
 ];
 
