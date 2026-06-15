@@ -173,7 +173,7 @@ function buildCustomerEmail({
         <div style="border:2px solid #028eda;background:#eef8ff;padding:18px;margin:22px 0;">
           <p style="margin:0;color:#028eda;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Required transfer comment</p>
           <p style="margin:8px 0 0;font-size:34px;font-weight:800;color:#08295f;letter-spacing:0.04em;">${orderNumber}</p>
-          <p style="margin:10px 0 0;font-size:14px;color:#08295f;font-weight:700;">Enter this order number only in the Interac e-transfer comment/message field. Do not add product names, notes, or extra text.</p>
+          <p style="margin:10px 0 0;font-size:14px;color:#08295f;font-weight:700;">Enter only this order number in the Interac e-transfer message section. Do not add anything else, including product names, notes, or extra text.</p>
         </div>
         <p>Your order remains payment pending until Royalis Lab confirms the real deposit in our bank account and matches it to your order number. Payment confirmation is expected within 24 hours or less.</p>
         <p>Once payment is accepted, we will ship your product(s) by Canada Post in discreet packaging the next business day, and in some cases the same business day. Your order ships from within Ontario, Canada, and tracking will be provided.</p>
@@ -201,7 +201,7 @@ function buildCustomerEmail({
         <p style="color:#52657c;">Royalis Lab<br />AB, Canada</p>
       </div>
     `,
-    text: `Royalis Lab\n\nThank you for your order, ${customerName}.\n\nYour order #${orderNumber} is currently on hold until your e-transfer payment has been processed.\n\nE-transfer instructions:\n1. Payee: ${etransfer.payee}\n2. Email: ${etransfer.email}\n\nRequired transfer comment:\n${orderNumber}\n\nEnter this order number only in the Interac e-transfer comment/message field. Do not add product names, notes, or extra text.\n\nYour order remains payment pending until Royalis Lab confirms the real deposit in our bank account and matches it to your order number.\n\nOrder summary:\n${summaryText}\nSubtotal: ${money(subtotal)}\nShipping: ${shipping === 0 ? "Free" : money(shipping)}\nTotal: ${money(total)}\nPayment method: E-transfer\n\nBilling address:\n${formatAddress(billingAddress)}\n\nShipping address:\n${formatAddress(shippingAddress)}\n\nPayment confirmation is expected within 24 hours or less. Orders ship by Canada Post after payment acceptance.`
+    text: `Royalis Lab\n\nThank you for your order, ${customerName}.\n\nYour order #${orderNumber} is currently on hold until your e-transfer payment has been processed.\n\nE-transfer instructions:\n1. Payee: ${etransfer.payee}\n2. Email: ${etransfer.email}\n\nRequired transfer comment:\n${orderNumber}\n\nEnter only this order number in the Interac e-transfer message section. Do not add anything else, including product names, notes, or extra text.\n\nYour order remains payment pending until Royalis Lab confirms the real deposit in our bank account and matches it to your order number.\n\nOrder summary:\n${summaryText}\nSubtotal: ${money(subtotal)}\nShipping: ${shipping === 0 ? "Free" : money(shipping)}\nTotal: ${money(total)}\nPayment method: E-transfer\n\nBilling address:\n${formatAddress(billingAddress)}\n\nShipping address:\n${formatAddress(shippingAddress)}\n\nPayment confirmation is expected within 24 hours or less. Orders ship by Canada Post after payment acceptance.`
   };
 }
 

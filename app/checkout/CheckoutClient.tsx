@@ -167,8 +167,8 @@ export function CheckoutClient() {
               {confirmation.orderNumber}
             </p>
             <p className="mt-3 text-sm font-semibold leading-6 text-carbon">
-              Enter this order number only in the Interac e-transfer comment/message field.
-              Do not add product names, notes, or extra text.
+              Enter only this order number in the Interac e-transfer message section.
+              Do not add anything else, including product names, notes, or extra text.
             </p>
           </div>
 
@@ -244,8 +244,8 @@ export function CheckoutClient() {
           </label>
           <div className="mt-4 grid gap-2 text-sm leading-6 text-lab">
             <p>Send payment to info@royalislabs.com after placing the order.</p>
-            <p>
-              Use the generated order number only in the Interac e-transfer comment/message field.
+            <p className="border border-arctic/20 bg-paper px-3 py-2 font-semibold text-carbon">
+              In the Interac e-transfer message section, enter only the generated order number. Do not add anything else.
             </p>
             <p>Payment acceptance is usually confirmed within 24 hours or less.</p>
           </div>

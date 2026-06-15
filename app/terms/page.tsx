@@ -27,7 +27,7 @@ const terms = [
   },
   {
     title: "Payment",
-    body: "E-transfer orders are received as payment pending. Orders are processed after payment is accepted and matched to the order number."
+    body: "E-transfer orders are received as payment pending. Orders are processed after payment is accepted and matched to the order number. Customers must enter only the order number in the transfer message section and must not add anything else."
   },
   {
     title: "Final sale",

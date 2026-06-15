@@ -97,7 +97,8 @@ export function Footer() {
           <p className="text-sm font-semibold text-paper">Payment</p>
           <p className="mt-4 text-sm leading-6 text-paper/70">
             E-transfer orders remain payment pending until Royalis Labs confirms the
-            actual bank deposit and matches it to the order number.
+            actual bank deposit and matches it to the order number. Customers must
+            enter only the order number in the transfer message section and nothing else.
           </p>
         </div>
       </div>

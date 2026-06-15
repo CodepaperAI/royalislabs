@@ -15,8 +15,8 @@ export default function CheckoutPage() {
           E-transfer checkout.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-lab">
-          Place the order first, then send the e-transfer with your order number only
-          in the message field. Orders remain payment pending until accepted.
+          Place the order first, then send the e-transfer with only your order number
+          in the message section. Do not add anything else. Orders remain payment pending until accepted.
         </p>
       </section>
 
