@@ -14,7 +14,50 @@ type EmailPayload = {
   attachments?: EmailAttachment[];
 };
 
+async function sendWithResend(payload: EmailPayload) {
+  const apiKey = process.env.RESEND_API_KEY || "";
+  const from = process.env.ORDER_FROM_EMAIL || "Royalis Lab <info@royalislabs.com>";
+  const replyTo = process.env.ORDER_REPLY_TO_EMAIL || process.env.ETRANSFER_EMAIL || "info@royalislabs.com";
+
+  if (!apiKey) {
+    throw new Error("Resend email is not configured.");
+  }
+
+  if (payload.attachments?.length) {
+    throw new Error("Resend attachment delivery is not implemented.");
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from,
+      to: payload.to,
+      reply_to: replyTo,
+      subject: payload.subject,
+      html: payload.html,
+      text: payload.text
+    })
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    throw new Error(`Resend email failed: ${response.status} ${details}`);
+  }
+}
+
 export async function sendTransactionalEmail(payload: EmailPayload) {
+  const emailProvider = (process.env.EMAIL_PROVIDER || "").toLowerCase();
+  const resendApiKey = process.env.RESEND_API_KEY || "";
+
+  if (emailProvider === "resend" || resendApiKey) {
+    await sendWithResend(payload);
+    return;
+  }
+
   const smtpUser = process.env.GOOGLE_WORKSPACE_SMTP_USER || "";
   const smtpPass = (process.env.GOOGLE_WORKSPACE_SMTP_PASS || "").replace(/\s+/g, "");
   const smtpHost = process.env.GOOGLE_WORKSPACE_SMTP_HOST || "smtp.gmail.com";
